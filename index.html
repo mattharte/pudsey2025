@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Dropdowns (A, C, E)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #66CC33; /* Bright Green from website accents */
+            --dark-green: #4CAF50; /* A slightly darker green for contrast */
+            --text-dark: #333;
+            --text-light: #f8f8f8;
+            --border-gray: #ddd;
+            --background-start: #e0ffe0; /* Light green for gradient start */
+            --background-end: #f0fff0;   /* Lighter green for gradient end */
+            --button-hover: #5cb85c;
+            --shadow-color-dark: rgba(0, 0, 0, 0.15); /* Subtle dark shadow */
+            --shadow-color-light: rgba(255, 255, 255, 0.1); /* Subtle light shadow for dark text */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background:
+                linear-gradient(to bottom right, rgba(224, 255, 224, 0.8), rgba(240, 255, 240, 0.8)), /* Gradient with transparency */
+                url('https://pudseysixthformcollege.ac.uk/wp-content/uploads/2025/03/PSFC-building-compressed2.jpg') no-repeat center center fixed; /* Image */
+            background-size: cover; /* Ensures the image covers the entire background */
+            min-height: 100vh; /* Ensure gradient covers full viewport height */
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: var(--dark-green); /* Use a darker green for the header */
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centers content horizontally */
+        }
+
+        .header .logo {
+            height: 60px; /* Adjust as needed */
+            margin-right: 20px;
+            filter: brightness(1.1); /* Slightly brighten the logo if needed */
+        }
+
+        .header h1 {
+            color: var(--text-light);
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px var(--shadow-color-dark);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally within container */
+            min-height: 400px; /* Ensure space for content and images */
+            overflow: hidden; /* Helps contain absolute children if any overflow */
+        }
+
+        h1, h2 {
+            color: var(--dark-green); /* Use dark green for headings */
+            font-weight: 700;
+            margin-bottom: 20px;
+            /* Drop shadow for main H1 and H2 */
+            text-shadow: 1px 1px 2px var(--shadow-color-dark);
+            text-align: center; /* Center these headings within the container */
+        }
+
+        h1 {
+            font-size: 2.2em;
+        }
+		
+		.forbidden {
+            font-size: 1.5em;
+            width: 100%;
+			border: 2px solid var(--primary-green);
+            border-radius: 6px;
+            box-sizing: border-box;
+            color: black;
+            background-color: #f9da03;
+            padding: 12px 15px;	
+                    }
+
+        h2 {
+            font-size: 1.5em;
+            color: #555;
+            margin-top: -10px;
+            margin-bottom: 30px;
+        }
+
+        .main-content-area {
+            display: flex;
+            justify-content: center; /* Centers the interactive area and image wrapper */
+            align-items: flex-start; /* Align items to the top to prevent stretching */
+            flex-wrap: wrap; /* Allows stacking on smaller screens */
+            width: 100%; /* Take full width of container */
+            gap: 20px; /* Space between interactive area and images wrapper */
+        }
+
+        .interactive-dropdown-area {
+            display: flex;
+            gap: 20px; /* Space between info boxes and dropdowns */
+            flex-direction: row; /* Info boxes on left, dropdowns on right */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            max-width: 650px; /* Max width for this section */
+            flex-grow: 1;
+            flex-shrink: 1;
+            min-width: 300px; /* Ensure it doesn't get too small */
+        }
+
+        .subject-info-boxes {
+            flex-basis: 200px; /* Fixed width for the info boxes column */
+            flex-shrink: 0; /* Don't shrink these boxes */
+            display: flex;
+            flex-direction: column; /* Stack info boxes vertically */
+            gap: 25px; /* Gap between individual info boxes, matching dropdowns */
+            padding-top: 42px; /* Align with dropdown labels (rough estimate, adjust as needed) */
+        }
+        /* Adjusted padding-top for better alignment with labels*/
+        .subject-info-boxes > div:first-child {
+            margin-top: 0;
+        }
+
+
+        .dropdown-group {
+            flex-grow: 1; /* Allow dropdowns to take remaining space */
+            min-width: 280px; /* Ensure dropdowns don't get too small */
+        }
+
+        div.dropdown-group > div {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark-green);
+            font-size: 1.1em;
+            text-shadow: 0.5px 0.5px 1.5px var(--shadow-color-dark);
+        }
+
+        select {
+            padding: 12px 15px;
+            border: 2px solid var(--primary-green);
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1em;
+            color: var(--text-dark);
+            background-color: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%234CAF50" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 20px;
+            cursor: pointer;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--dark-green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.25);
+        }
+
+        select:disabled {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .feedback-images-wrapper {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #thumbsUpContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        #thumbsUpContainer img {
+            max-width: 90%;
+            max-height: 90%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        #doctorImageContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        #doctorImageContainer img {
+            max-width: 90%;
+            max-height: 70%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+
+        .speech-bubble {
+            position: relative;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 0.85em;
+            color: var(--text-dark);
+            max-width: 180px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            line-height: 1.3;
+            pointer-events: auto;
+            z-index: 11;
+        }
+
+        .speech-bubble a {
+            color: var(--dark-green);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px;
+            border-style: solid;
+            border-color: transparent transparent #ccc transparent;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 7px;
+            border-style: solid;
+            border-color: transparent transparent #f0f0f0 transparent;
+            margin-bottom: 1px;
+        }
+
+        #notPossibleBox,
+        #areYouMentalBox {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-color: red;
+            color: yellow;
+            font-weight: bold;
+            font-size: 1.3em;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+        #notPossibleBox { z-index: 12; }
+        #areYouMentalBox { z-index: 13; } /* Highest priority */
+
+
+        /* Styling for individual subject requirement boxes */
+        .subject-requirement-box {
+            background-color: #e6f7ff; /* Light blue background */
+            border: 1px solid #a6d9f7; /* Matching blue border */
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 0.9em;
+            color: var(--text-dark);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            line-height: 1.4;
+            display: none; /* Hidden by default */
+            box-sizing: border-box; /* Include padding/border in element's total width/height */
+            text-align: center; /* Center the text within the box */
+            /* Add this to allow them to occupy space even when hidden, helping with layout consistency */
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+
+        .subject-requirement-box.active {
+            visibility: visible;
+            opacity: 1;
+            display: block; /* Ensure it's block when active */
+        }
+
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+                padding: 15px 20px;
+            }
+
+            .header .logo {
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            select {
+                max-width: 100%;
+            }
+
+            .main-content-area {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .interactive-dropdown-area {
+                flex-direction: column; /* Stack info boxes and dropdowns vertically */
+                gap: 0; /* Remove gap when stacked */
+            }
+
+            .subject-info-boxes {
+                flex-basis: auto; /* Remove fixed width */
+                width: 100%; /* Take full width */
+                padding-top: 0; /* Remove top padding for alignment */
+                margin-bottom: 20px; /* Space between info boxes and dropdowns */
+            }
+
+            .subject-requirement-box {
+                margin-bottom: 15px; /* Space between individual requirement boxes */
+            }
+            .subject-info-boxes > div:last-child {
+                margin-bottom: 0; /* No margin after the last one in mobile */
+            }
+
+
+            .feedback-images-wrapper {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+        }
+		
+		.alt-course-sticker {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: 700;
+    padding: 12px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 0.95em;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    transition: transform 0.6s ease-in-out;
+}
+.alt-course-sticker:hover {
+    transform: scale(1.05);
+    background-color: #ffdb4d;
+}
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <img src="https://pudseysixthformcollege.ac.uk/wp-content/uploads/2022/10/PSFC_logo_navy-01-p-500.png" alt="Pudsey Sixth Form College Logo" class="logo">
+        <h1>Pudsey Course Picker</h1>
+    </header>
+
+    <div class="container">
+        <h1>Select A-level Study Programme</h1>
+        <h2>Select the subjects in alphabetical order :)</h2>
+
+        <div class="main-content-area">
+
+            <div class="interactive-dropdown-area">
+                <div class="subject-info-boxes">
+                    <div id="artRequirementsBox" class="subject-requirement-box">
+                        Art requires: 4 in GCSE Art or another creative subject OR portfolio
+                    </div>
+                    <div id="biologyRequirementsBox" class="subject-requirement-box">
+                        Biology requires: 5-5 in Synergy Science, or 5 in Biology AND 5 in Maths
+                    </div>
+                    <div id="businessRequirementsBox" class="subject-requirement-box">
+                        Buisness requires 5 in Maths
+                    </div>
+                    <div id="chemistryRequirementsBox" class="subject-requirement-box">
+                        Chemistry requires 5 in Chemistry or 5-5 in Combined Science, AND 5 in Maths
+                    </div>
+                    <div id="englishLitRequirementsBox" class="subject-requirement-box">
+                        English Lit requires 5 in English Lit
+                    </div>
+                    <div id="geographyRequirementsBox" class="subject-requirement-box">
+                        Gepgraphy requires 5 in English or Geography
+                    </div>
+                    <div id="historyRequirementsBox" class="subject-requirement-box">
+                        History requires 5 in English or History
+                    </div>
+                    <div id="lawRequirementsBox" class="subject-requirement-box">
+                        Law requires 5 in an essay subject (English, History or RS)
+                    </div>
+                    <div id="mathsRequirementsBox" class="subject-requirement-box">
+                        Maths requires 6 in Maths
+                    </div>
+                    <div id="philosophyRequirementsBox" class="subject-requirement-box">
+                        Philosophy requires 5 in an essay subject (English, History or RS)
+                    </div>
+                    <div id="physicsRequirementsBox" class="subject-requirement-box">
+                        Physics equires 6 in Maths AND 5 in Physics or 5-5 in Combined Science. Should also study A Level Maths
+                    </div>
+                    <div id="politicsRequirementsBox" class="subject-requirement-box">
+                        Politics requires 5 in an essay subject (English, History or RS)
+                    </div>
+                    <div id="psychologyRequirementsBox" class="subject-requirement-box">
+                        Psychology requires 5 in Maths, Science 5-5 (separate or combined) and an essay subject (English, History or RS)
+                    </div>
+                    <div id="rsRequirementsBox" class="subject-requirement-box">
+                        RS requires 5 in an essay subject (English, History or RS)
+                    </div>
+                    <div id="sociologyRequirementsBox" class="subject-requirement-box">
+                        Sociology requires 5 in an essay subject (English, History or RS)
+                    </div>
+                </div>
+
+                <div class="dropdown-group">
+                    <div>
+                        <label for="columnA">Subject 1:</label>
+                        <select id="columnA">
+                            <option value="">--Please select--</option>
+                            <option value="Art">Art</option>
+                            <option value="Business">Business</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="English Lit">English Lit</option>
+                            <option value="Geography">Geography</option>
+                            <option value="History">History</option>
+                            <option value="Law">Law</option>
+                            <option value="Maths">Maths</option>
+                            <option value="Media">Media</option>
+                            <option value="Philosophy">Philosophy</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Politics">Politics</option>
+                            <option value="Psychology">Psychology</option>
+                            <option value="RS">RS</option>
+                            <option value="Sociology">Sociology</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="columnC">Subject 2:</label>
+                        <select id="columnC" disabled>
+                            <option value="">--Please select Column A first--</option>
+                            <option value="Art">Art</option>
+                            <option value="Biology">Biology</option>
+                            <option value="Business">Business</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="English Lit">English Lit</option>
+                            <option value="Film">Film</option>
+                            <option value="Geography">Geography</option>
+                            <option value="History">History</option>
+                            <option value="Law">Law</option>
+                            <option value="Maths">Maths</option>
+                            <option value="Media">Media</option>
+                            <option value="Philosophy">Philosophy</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Politics">Politics</option>
+                            <option value="Psychology">Psychology</option>
+                            <option value="RS">RS</option>
+                            <option value="Sociology">Sociology</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="columnE">Subject 3:</label>
+                        <select id="columnE" disabled>
+                            <option value="">--Please select Column C first--</option>
+                            <option value="Art">Art</option>
+                            <option value="Biology">Biology</option>
+                            <option value="Business">Business</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="English Lit">English Lit</option>
+                            <option value="Film">Film</option>
+                            <option value="Geography">Geography</option>
+                            <option value="History">History</option>
+                            <option value="Law">Law</option>
+                            <option value="Maths">Maths</option>
+                            <option value="Media">Media</option>
+                            <option value="Medicine">Medicine</option>
+                            <option value="Philosophy">Philosophy</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Politics">Politics</option>
+                            <option value="Psychology">Psychology</option>
+                            <option value="RS">RS</option>
+                            <option value="Sociology">Sociology</option>
+                        </select>
+                    </div> 
+					
+					<div class="forbidden">
+						<H3>Unavailable Combinations</H3>
+							<h5>
+							<ol>
+								<li>Art	Media	Politics</li>
+								<li>Business	Media	Politics</li>
+								<li>Business	Media	RS</li>
+								<li>Business	Politics	RS</li>
+								<li>English Lang	History	Media</li>
+								<li>English Lang	History	Politics</li>
+								<li>English Lang	Media	Politics</li>
+								<li>Film	Media	Sociology</li>
+								<li>Film	Politics	Sociology</li>
+								<li>Geography	Media	Politics</li>
+								<li>History	Media	Politics</li>
+								<li>Media	Philosophy	Politics</li>
+								<li>Media	Politics	Psychology</li>
+								<li>Media	Politics	RS</li>
+								<li>Media	Politics	Sociology</li>
+							</ol>
+							</h5>
+							</div>
+                </div>      
+      </div>
+
+
+
+            <div class="feedback-images-wrapper">
+                <div id="thumbsUpContainer">
+                    <img src="https://logos-world.net/wp-content/uploads/2024/01/Thumbs-Up-Emoji.png" alt="Thumbs Up Emoji">
+                </div>
+
+                <div id="doctorImageContainer">
+                    <img src="https://img.freepik.com/free-photo/fun-3d-cartoon-illustration-indian-doctor_183364-114483.jpg?semt=ais_hybrid&w=740" alt="Cartoon Doctor">
+                    <div class="speech-bubble">
+                        <p>Discuss UCAT (University Clinical Aptitude Test) or the BMAT (BioMedical Admissions Test) <a href="https://www.themedicportal.com/application-guide/choosing-a-medical-school/what-a-levels-do-you-need-to-be-a-doctor/#:~:text=What%2Dlevels%20are%20compulsory,wider%20variety%20of%20science%20subjects." target="_blank">CLICK HERE</a></p>
+                    </div>
+                </div>
+
+                <div id="notPossibleBox">
+                    NOT POSSIBLE
+                </div>
+
+                <div id="areYouMentalBox">
+                    NOT ADVISABLE UNLESS V. HIGH RE GRADE
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+    <script>
+        const columnA = document.getElementById('columnA');
+        const columnC = document.getElementById('columnC');
+        const columnE = document.getElementById('columnE');
+        const thumbsUpContainer = document.getElementById('thumbsUpContainer');
+        const doctorImageContainer = document.getElementById('doctorImageContainer');
+        const notPossibleBox = document.getElementById('notPossibleBox');
+        const areYouMentalBox = document.getElementById('areYouMentalBox');
+
+        // Get references to all the new subject requirement boxes
+        const artRequirementsBox = document.getElementById('artRequirementsBox');
+        const biologyRequirementsBox = document.getElementById('biologyRequirementsBox');
+        const businessRequirementsBox = document.getElementById('businessRequirementsBox');
+        const chemistryRequirementsBox = document.getElementById('chemistryRequirementsBox');
+        const englishLitRequirementsBox = document.getElementById('englishLitRequirementsBox');
+        const geographyRequirementsBox = document.getElementById('geographyRequirementsBox');
+        const historyRequirementsBox = document.getElementById('historyRequirementsBox');
+        const lawRequirementsBox = document.getElementById('lawRequirementsBox');
+        const mathsRequirementsBox = document.getElementById('mathsRequirementsBox');
+        const philosophyRequirementsBox = document.getElementById('philosophyRequirementsBox');
+        const physicsRequirementsBox = document.getElementById('physicsRequirementsBox');
+        const politicsRequirementsBox = document.getElementById('politicsRequirementsBox');
+        const psychologyRequirementsBox = document.getElementById('psychologyRequirementsBox');
+        const rsRequirementsBox = document.getElementById('rsRequirementsBox');
+        const sociologyRequirementsBox = document.getElementById('sociologyRequirementsBox');
+
+        // Store all requirement boxes in an array for easy iteration
+        const allRequirementBoxes = [
+            artRequirementsBox, biologyRequirementsBox, businessRequirementsBox,
+            chemistryRequirementsBox, englishLitRequirementsBox, geographyRequirementsBox,
+            historyRequirementsBox, lawRequirementsBox, mathsRequirementsBox,
+            philosophyRequirementsBox, physicsRequirementsBox, politicsRequirementsBox,
+            psychologyRequirementsBox, rsRequirementsBox, sociologyRequirementsBox
+        ];
+
+
+        // Updated function to hide ALL possible display elements (feedback and requirements)
+        function hideAllDisplayElements() {
+            thumbsUpContainer.style.display = 'none';
+            doctorImageContainer.style.display = 'none';
+            notPossibleBox.style.display = 'none';
+            areYouMentalBox.style.display = 'none';
+
+            // Hide all subject requirement boxes and remove 'active' class
+            allRequirementBoxes.forEach(box => {
+                box.classList.remove('active');
+                // We use visibility: hidden; and opacity: 0; for smooth transition
+                // and to maintain layout space when hidden.
+                // display: none; is only used when the parent is hidden.
+            });
+        }
+
+        // Function to manage individual subject requirement boxes
+        function updateRequirementBoxes() {
+            // Hide all requirement boxes first to ensure only relevant ones are displayed
+            allRequirementBoxes.forEach(box => box.classList.remove('active'));
+
+            const selectedValues = [columnA.value, columnC.value, columnE.value];
+
+            // Check each selected value and activate its corresponding box
+            if (selectedValues.includes('Art')) { artRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('Biology')) { biologyRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('Business')) { businessRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('Chemistry')) { chemistryRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('English Lit')) { englishLitRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('Geography')) { geographyRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('History')) { historyRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('Law')) { lawRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('Maths')) { mathsRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('Philosophy')) { philosophyRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('Physics')) { physicsRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('Politics')) { politicsRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('Psychology')) { psychologyRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('RS')) { rsRequirementsBox.classList.add('active'); }
+            if (selectedValues.includes('Sociology')) { sociologyRequirementsBox.classList.add('active'); }
+        }
+
+
+        // This function will be called whenever any of the subject dropdowns change
+        function checkSubjectCombination() {
+            hideAllDisplayElements(); // Always start by hiding all display elements
+
+            updateRequirementBoxes(); // First, update the individual subject requirement boxes
+
+            // Now, check for the main combination feedback boxes (highest priority first)
+            const selectedA = columnA.value;
+            const selectedC = columnC.value;
+            const selectedE = columnE.value;
+
+            const uniqueSelectedSubjects = new Set();
+            if (selectedA && selectedA !== '--Please select--') {
+                uniqueSelectedSubjects.add(selectedA);
+            }
+            if (selectedC && selectedC !== '--Please select Column A first--') {
+                uniqueSelectedSubjects.add(selectedC);
+            }
+            if (selectedE && selectedE !== '--Please select Column C first--') {
+                uniqueSelectedSubjects.add(selectedE);
+            }
+
+            const finalSelectedSubjects = Array.from(uniqueSelectedSubjects);
+
+            const hasChemistry = finalSelectedSubjects.includes('Chemistry');
+            const hasBiology = finalSelectedSubjects.includes('Biology');
+            const hasMedia = finalSelectedSubjects.includes('Media');
+            const hasFilm = finalSelectedSubjects.includes('Film');
+            const hasRS = finalSelectedSubjects.includes('RS');
+            const hasPhilosophy = finalSelectedSubjects.includes('Philosophy');
+            const hasThreeDistinctSubjects = finalSelectedSubjects.length === 3;
+
+            // Priority 1: "ARE YOU MENTAL!?"
+            if (hasRS && hasPhilosophy) {
+                areYouMentalBox.style.display = 'flex';
+            }
+            // Priority 2: "NOT POSSIBLE"
+            else if (hasMedia && hasFilm) {
+                notPossibleBox.style.display = 'flex';
+            }
+            // Priority 3: Doctor
+            else if (hasChemistry && hasBiology) {
+                doctorImageContainer.style.display = 'flex';
+            }
+            // Priority 4: Thumbs Up (only if 3 distinct subjects are chosen and none of the above specific combos)
+            else if (hasThreeDistinctSubjects) {
+                thumbsUpContainer.style.display = 'flex';
+            }
+        }
+
+        // Attach the checkSubjectCombination function to the 'change' event of all relevant dropdowns
+        columnA.addEventListener('change', checkSubjectCombination);
+        columnC.addEventListener('change', checkSubjectCombination);
+        columnE.addEventListener('change', checkSubjectCombination);
+
+        // Perform an initial check when the page loads
+        document.addEventListener('DOMContentLoaded', checkSubjectCombination);
+
+        // NOTE: Your original script.js file (if it exists) would contain the logic
+        // for enabling/disabling columnC and columnE based on selections in A and C.
+        // Make sure those parts of your script.js are still correctly managing the 'disabled' attribute.
+        // The `checkSubjectCombination()` function here will react to the actual `value` of the selects.
+    </script>
+
+<a href="https://leedscitycollege.ac.uk/courses/?s=applied%20science" target="_blank" class="alt-course-sticker">
+    CLICK HERE FOR ALTERNATIVE COURSES
+</a>
+
+</body>
+</html>
