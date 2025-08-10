@@ -283,7 +283,7 @@
         }
 
         #notPossibleBox,
-        #areYouMentalBox {
+        #NocomboBox {
             position: absolute;
             top: 0;
             left: 0;
@@ -303,7 +303,7 @@
             pointer-events: none;
         }
         #notPossibleBox { z-index: 12; }
-        #areYouMentalBox { z-index: 13; } /* Highest priority */
+        #NocomboBox { z-index: 13; } /* Highest priority */
 
 
         /* Styling for individual subject requirement boxes */
@@ -593,7 +593,7 @@
                     COMBINATION NOT POSSIBLE
                 </div>
 
-                <div id="areYouMentalBox">
+                <div id="NocomboBox">
                     NOT ADVISABLE UNLESS V. HIGH RE GRADE
                 </div>
             </div>
@@ -611,7 +611,7 @@
         const thumbsUpContainer = document.getElementById('thumbsUpContainer');
         const doctorImageContainer = document.getElementById('doctorImageContainer');
         const notPossibleBox = document.getElementById('notPossibleBox');
-        const areYouMentalBox = document.getElementById('areYouMentalBox');
+        const NocomboBox = document.getElementById('NocomboBox');
 
         // Get references to all the new subject requirement boxes
         const artRequirementsBox = document.getElementById('artRequirementsBox');
@@ -645,7 +645,7 @@
             thumbsUpContainer.style.display = 'none';
             doctorImageContainer.style.display = 'none';
             notPossibleBox.style.display = 'none';
-            areYouMentalBox.style.display = 'none';
+            NocomboBox.style.display = 'none';
 
             // Hide all subject requirement boxes and remove 'active' class
             allRequirementBoxes.forEach(box => {
@@ -716,7 +716,7 @@
 
             // Priority 1: "ARE YOU MENTAL!?"
             if (hasRS && hasPhilosophy) {
-                areYouMentalBox.style.display = 'flex';
+                NocomboBox.style.display = 'flex';
             }
             // Priority 2: "NOT POSSIBLE"
             else if (hasMedia && hasFilm) {
@@ -753,6 +753,7 @@
 </body>
 
 </html>
+
 
 
 
