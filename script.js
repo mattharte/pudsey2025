@@ -5,7 +5,6 @@ Art,Biology,Business
 Art,Biology,Chemistry
 Art,Biology,English Lang
 Art,Biology,English Lit
-Art,Biology,Film
 Art,Biology,Geography
 Art,Biology,History
 Art,Biology,Maths
@@ -19,7 +18,6 @@ Art,Biology,Sociology
 Art,Business,Chemistry
 Art,Business,English Lang
 Art,Business,English Lit
-Art,Business,Film
 Art,Business,Geography
 Art,Business,History
 Art,Business,Maths
@@ -32,7 +30,6 @@ Art,Business,RS
 Art,Business,Sociology
 Art,Chemistry,English Lang
 Art,Chemistry,English Lit
-Art,Chemistry,Film
 Art,Chemistry,Geography
 Art,Chemistry,History
 Art,Chemistry,Maths
@@ -44,7 +41,6 @@ Art,Chemistry,Psychology
 Art,Chemistry,RS
 Art,Chemistry,Sociology
 Art,English Lang,English Lit
-Art,English Lang,Film
 Art,English Lang,Geography
 Art,English Lang,History
 Art,English Lang,Maths
@@ -55,7 +51,6 @@ Art,English Lang,Politics
 Art,English Lang,Psychology
 Art,English Lang,RS
 Art,English Lang,Sociology
-Art,English Lit,Film
 Art,English Lit,Geography
 Art,English Lit,History
 Art,English Lit,Maths
@@ -66,16 +61,6 @@ Art,English Lit,Politics
 Art,English Lit,Psychology
 Art,English Lit,RS
 Art,English Lit,Sociology
-Art,Film,Geography
-Art,Film,History
-Art,Film,Maths
-Art,Film,Media
-Art,Film,Philosophy
-Art,Film,Physics
-Art,Film,Politics
-Art,Film,Psychology
-Art,Film,RS
-Art,Film,Sociology
 Art,Geography,History
 Art,Geography,Maths
 Art,Geography,Media
@@ -122,7 +107,6 @@ Art,RS,Sociology
 Biology,Business,Chemistry
 Biology,Business,English Lang
 Biology,Business,English Lit
-Biology,Business,Film
 Biology,Business,Geography
 Biology,Business,History
 Biology,Business,Maths
@@ -135,7 +119,6 @@ Biology,Business,RS
 Biology,Business,Sociology
 Biology,Chemistry,English Lang
 Biology,Chemistry,English Lit
-Biology,Chemistry,Film
 Biology,Chemistry,Geography
 Biology,Chemistry,History
 Biology,Chemistry,Maths
@@ -147,7 +130,6 @@ Biology,Chemistry,Psychology
 Biology,Chemistry,RS
 Biology,Chemistry,Sociology
 Biology,English Lang,English Lit
-Biology,English Lang,Film
 Biology,English Lang,Geography
 Biology,English Lang,History
 Biology,English Lang,Maths
@@ -158,7 +140,6 @@ Biology,English Lang,Politics
 Biology,English Lang,Psychology
 Biology,English Lang,RS
 Biology,English Lang,Sociology
-Biology,English Lit,Film
 Biology,English Lit,Geography
 Biology,English Lit,History
 Biology,English Lit,Maths
@@ -169,16 +150,6 @@ Biology,English Lit,Politics
 Biology,English Lit,Psychology
 Biology,English Lit,RS
 Biology,English Lit,Sociology
-Biology,Film,Geography
-Biology,Film,History
-Biology,Film,Maths
-Biology,Film,Media
-Biology,Film,Philosophy
-Biology,Film,Physics
-Biology,Film,Politics
-Biology,Film,Psychology
-Biology,Film,RS
-Biology,Film,Sociology
 Biology,Geography,History
 Biology,Geography,Maths
 Biology,Geography,Media
@@ -225,7 +196,6 @@ Biology,Psychology,Sociology
 Biology,RS,Sociology
 Business,Chemistry,English Lang
 Business,Chemistry,English Lit
-Business,Chemistry,Film
 Business,Chemistry,Geography
 Business,Chemistry,History
 Business,Chemistry,Maths
@@ -237,7 +207,6 @@ Business,Chemistry,Psychology
 Business,Chemistry,RS
 Business,Chemistry,Sociology
 Business,English Lang,English Lit
-Business,English Lang,Film
 Business,English Lang,Geography
 Business,English Lang,History
 Business,English Lang,Maths
@@ -248,7 +217,6 @@ Business,English Lang,Politics
 Business,English Lang,Psychology
 Business,English Lang,RS
 Business,English Lang,Sociology
-Business,English Lit,Film
 Business,English Lit,Geography
 Business,English Lit,History
 Business,English Lit,Maths
@@ -259,16 +227,6 @@ Business,English Lit,Politics
 Business,English Lit,Psychology
 Business,English Lit,RS
 Business,English Lit,Sociology
-Business,Film,Geography
-Business,Film,History
-Business,Film,Maths
-Business,Film,Media
-Business,Film,Philosophy
-Business,Film,Physics
-Business,Film,Politics
-Business,Film,Psychology
-Business,Film,RS
-Business,Film,Sociology
 Business,Geography,History
 Business,Geography,Maths
 Business,Geography,Media
@@ -312,7 +270,6 @@ Business,Psychology,RS
 Business,Psychology,Sociology
 Business,RS,Sociology
 Chemistry,English Lang,English Lit
-Chemistry,English Lang,Film
 Chemistry,English Lang,Geography
 Chemistry,English Lang,Maths
 Chemistry,English Lang,Philosophy
@@ -320,7 +277,6 @@ Chemistry,English Lang,Physics
 Chemistry,English Lang,Psychology
 Chemistry,English Lang,RS
 Chemistry,English Lang,Sociology
-Chemistry,English Lit,Film
 Chemistry,English Lit,Geography
 Chemistry,English Lit,History
 Chemistry,English Lit,Maths
@@ -331,16 +287,6 @@ Chemistry,English Lit,Politics
 Chemistry,English Lit,Psychology
 Chemistry,English Lit,RS
 Chemistry,English Lit,Sociology
-Chemistry,Film,Geography
-Chemistry,Film,History
-Chemistry,Film,Maths
-Chemistry,Film,Media
-Chemistry,Film,Philosophy
-Chemistry,Film,Physics
-Chemistry,Film,Politics
-Chemistry,Film,Psychology
-Chemistry,Film,RS
-Chemistry,Film,Sociology
 Chemistry,Geography,History
 Chemistry,Geography,Maths
 Chemistry,Geography,Media
@@ -383,7 +329,6 @@ Chemistry,Politics,Sociology
 Chemistry,Psychology,RS
 Chemistry,Psychology,Sociology
 Chemistry,RS,Sociology
-English Lang,English Lit,Film
 English Lang,English Lit,Geography
 English Lang,English Lit,History
 English Lang,English Lit,Maths
@@ -394,16 +339,6 @@ English Lang,English Lit,Politics
 English Lang,English Lit,Psychology
 English Lang,English Lit,RS
 English Lang,English Lit,Sociology
-English Lang,Film,Geography
-English Lang,Film,History
-English Lang,Film,Maths
-English Lang,Film,Media
-English Lang,Film,Philosophy
-English Lang,Film,Physics
-English Lang,Film,Politics
-English Lang,Film,Psychology
-English Lang,Film,RS
-English Lang,Film,Sociology
 English Lang,Geography,History
 English Lang,Geography,Maths
 English Lang,Geography,Media
@@ -446,16 +381,6 @@ English Lang,Politics,Sociology
 English Lang,Psychology,RS
 English Lang,Psychology,Sociology
 English Lang,RS,Sociology
-English Lit,Film,Geography
-English Lit,Film,History
-English Lit,Film,Maths
-English Lit,Film,Media
-English Lit,Film,Philosophy
-English Lit,Film,Physics
-English Lit,Film,Politics
-English Lit,Film,Psychology
-English Lit,Film,RS
-English Lit,Film,Sociology
 English Lit,Geography,History
 English Lit,Geography,Maths
 English Lit,Geography,Media
@@ -500,47 +425,6 @@ English Lit,Politics,Sociology
 English Lit,Psychology,RS
 English Lit,Psychology,Sociology
 English Lit,RS,Sociology
-Film,Geography,History
-Film,Geography,Maths
-Film,Geography,Media
-Film,Geography,Philosophy
-Film,Geography,Physics
-Film,Geography,Politics
-Film,Geography,Psychology
-Film,Geography,RS
-Film,Geography,Sociology
-Film,History,Maths
-Film,History,Media
-Film,History,Philosophy
-Film,History,Physics
-Film,History,Politics
-Film,History,Psychology
-Film,History,RS
-Film,History,Sociology
-Film,Maths,Media
-Film,Maths,Physics
-Film,Maths,Politics
-Film,Maths,Psychology
-Film,Maths,RS
-Film,Maths,Sociology
-Film,Media,Philosophy
-Film,Media,Physics
-Film,Media,Psychology
-Film,Media,RS
-Film,Philosophy,Physics
-Film,Philosophy,Politics
-Film,Philosophy,Psychology
-Film,Philosophy,RS
-Film,Philosophy,Sociology
-Film,Physics,Politics
-Film,Physics,Psychology
-Film,Physics,RS
-Film,Physics,Sociology
-Film,Politics,Psychology
-Film,Politics,RS
-Film,Psychology,RS
-Film,Psychology,Sociology
-Film,RS,Sociology
 Geography,History,Maths
 Geography,History,Media
 Geography,History,Philosophy
